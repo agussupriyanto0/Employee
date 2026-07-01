@@ -1,0 +1,41 @@
+#Memberi nama workflow
+name : Java CI
+
+#Kapan dia berjalan (on)
+on:
+  #Begitu kita push ke github langsung build
+  push:
+    branches:
+      - main
+
+#Setelah membuat PR github juga akan mengetest projectnya
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build:
+
+    #Membuat github mwminjamkan komputer linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Project
+        #Github mengambil source code
+        uses: action/checkout@v4
+
+      - name: Setup Java
+        #Install java
+        uses: action/setup-java@4
+        with:
+          distribution : temurin
+          java-version : 21
+
+      - name: Give execute permission
+        #Memberi permission biasanya continue-on-error:  permission denied
+        run: chmod +x mvnw
+
+      - name: Run test
+        #ini Github akan ngetest tapi working-directory:  envrionmentya
+        run: ./mvnw clean test
