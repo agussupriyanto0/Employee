@@ -23,11 +23,11 @@ jobs:
     steps:
       - name: Checkout Project
         #Github mengambil source code
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Setup Java
         #Install java
-        uses: action/setup-java@4
+        uses: actions/setup-java@4
         with:
           distribution : temurin
           java-version : 21
